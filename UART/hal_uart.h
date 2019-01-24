@@ -118,11 +118,19 @@ typedef enum{
 /*UART init structure definition*/
 typedef struct{
 
+<<<<<<< HEAD
 	uint32_t 		baudrate;			/*specifies baudrate of the uart communication*/
 	uint32_t 		worldlength;		/*specifies number of bits per frame*/
 	uint32_t		stopbits;			/*specifies stop bits */
 	uint32_t 		parity;				/*specifies parity*/
 	uint32_t 		mode;				/*specifies mode of communication Transmission or Reception*/
+=======
+	uint32_t 		baudrate;								/*specifies baudrate of the uart communication */
+	uint32_t 		worldlength;							/*specifies number of bits per frame*/
+	uint32_t		stopbits;								/*specifies stop bits */
+	uint32_t 		parity;									/*specifies parity*/
+	uint32_t 		mode;									/*specifies mode of communication Transmission or Reception*/
+>>>>>>> 7a73fceda3586f67fe9bde5f37c7ba1a3baf24f8
 	
 }uart_init_t;
 

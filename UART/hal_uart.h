@@ -116,6 +116,25 @@ typedef enum{
 #define UART_ONE_STOPBIT																(0)
 #define UART_TWO_STOPBITS																(1)
 
+/*ODD or EVEN parity checking*/
+#define UART_NO_PARITY																	(0)
+#define UART_ODD_PARITY																	(1)
+#define UART_EVEN_PARITY									              (2)
+
+/*FIFO mode*/
+#define UART_FIFO_ENABLED																(1)
+#define UART_FIFO_DISABLED															(0)
+
+
+/*Word length for the communication*/
+#define UART_WORDLENGTH_5BIT														(0)
+#define UART_WORDLENGTH_6BIT														(1)
+#define UART_WORDLENGTH_7BIT														(2)
+#define UART_WORDLENGTH_8BIT														(3)
+
+
+
+
 
 /*****************************************************************************/
 /*                                                                           */
@@ -130,7 +149,7 @@ typedef struct{
 	uint32_t 		worldlength;						/*specifies number of bits per frame*/
 	uint32_t		stopbits;								/*specifies stop bits */
 	uint32_t 		parity;									/*specifies parity*/
-	uint32_t 		mode;										/*specifies mode of communication Transmission or Reception*/
+	//uint32_t 		mode;										/*specifies mode of communication Transmission or Reception*/
 	bool 				fifo_mode;							/*specifies whethe FIFO is enabled or not, 1 = enabled; 0 = disabled*/
 	
 }uart_init_t;

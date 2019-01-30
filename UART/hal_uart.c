@@ -19,6 +19,57 @@ void hal_uart_disable_uart_module(UART0_Type *uart){
 }
 
 /**
+  * @brief  Enable Tx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_enable_uart_Tx(UART0_Type *uart){
+	uart->CTL |= (1 << UARTCTL_REG_TXE_FLAG_MASK);
+}
+
+/**
+  * @brief  Disable Tx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_disable_uart_Tx(UART0_Type *uart){
+	uart->CTL &= ~(1 << UARTCTL_REG_TXE_FLAG_MASK);
+}
+
+/**
+  * @brief  Enable Rx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_enable_uart_Rx(UART0_Type *uart){
+	uart->CTL |= (1 << UARTCTL_REG_RXE_FLAG_MASK);
+}
+
+
+/**
+  * @brief  Disable Rx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_disable_uart_Rx(UART0_Type *uart){
+	uart->CTL &= ~(1 << UARTCTL_REG_RXE_FLAG_MASK);
+}
+
+
+/**
+  * @brief  Configure the clock source
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_configure_clock_source(UART0_Type *uart, int8_t source_type){
+	
+	if(source_type == UART_CLOCK_PIOSC)
+		uart->CC |= UART_CLOCK_PIOSC;
+	else
+		uart->CC |= UART_CLOCK_SYSTEM;
+}
+
+/**
   * @brief  configure baudrate for the communication
   * @param  handle: pointer to a uart_handle_t structure
   * @retval None

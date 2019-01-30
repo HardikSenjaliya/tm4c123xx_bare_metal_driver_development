@@ -103,6 +103,10 @@ typedef enum{
 #define UARTDMACTL_REG_TXDMAE_FLAG_MASK									(1)
 #define UARTDMACTL_REG_RXDMAE_FLAG_MASK									(0)
 
+/*Clock sources for the UART*/
+#define UART_CLOCK_SYSTEM																(0)
+#define UART_CLOCK_PIOSC																(5)
+
 /*UART baudrates*/
 #define UART_BAUDRATE_4800															(uint32_t)(4800)
 #define UART_BAUDRATE_9600															(uint32_t)(9600)
@@ -177,13 +181,6 @@ typedef struct{
 /******************************************************************************/
 
 /**
-	* @brief  Initialized UART peripheral   
-	* @param  *handle : pointer to the handle structure  
-	* @retval None
-	*/	
-void hal_uart_init(uart_handle_t *handle);
-
-/**
 	* @brief  handles transmission of the data
 	* @param  *handle : pointer to the handle structure 
   * @param  *buffer : pointer to the TX buffer 
@@ -208,6 +205,14 @@ void hal_uart_rx(uart_handle_t *handle, uint8_t *buffer, uint32_t len);
   */
 void hal_uart_handle_interrupt(uart_handle_t *handle);
 
+
+/**
+  * @brief  Configure the clock source
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_configure_clock_source(UART0_Type *uart, int8_t source_type);
+
 /**
   * @brief  Enable UART
 	* @param  uart: pointer to UART base address
@@ -221,6 +226,35 @@ void hal_uart_enable_uart_module(UART0_Type *uart);
   * @retval None
   */
 void hal_uart_disable_uart_module(UART0_Type *uart);
+
+/**
+  * @brief  Enable Tx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_enable_uart_Tx(UART0_Type *uart);
+
+/**
+  * @brief  Disable Tx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_disable_uart_Tx(UART0_Type *uart);
+
+/**
+  * @brief  Enable Rx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_enable_uart_Rx(UART0_Type *uart);
+
+
+/**
+  * @brief  Disable Rx section of UART
+	* @param  uart: pointer to UART base address
+  * @retval None
+  */
+void hal_uart_disable_uart_Rx(UART0_Type *uart);
 
 /**
   * @brief  configure baudrate for the communication

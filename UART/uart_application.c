@@ -61,6 +61,8 @@ void uart_init(){
 	/*Configure GPIO pins for UART2*/
 	uart_gpio_init();
 	
+	uart2_handle.instance = UART2;
+	
 	/*Enable clock for UART2*/
 	sysctl->RCGCUART |= (1 << RCGCUART_CLOCK_GATING_UART2);
 	
@@ -70,14 +72,31 @@ void uart_init(){
 	uart2_handle.init.stopbits = UART_ONE_STOPBIT;					/*One stopbit*/
 	uart2_handle.init.worldlength = UART_WORDLENGTH_8BIT;		/*Data in a frame is 8 bits*/
 	
-	hal_uart_init(&uart2_handle);
-
+	/*Disable the UART2 module before configuring it*/
+	hal_uart_disable_uart_module(uart2_handle.instance);
 	
+	/*Initialize UART2*/
+	hal_uart_configure_baudrate(&uart2_handle);
+	hal_uart_enable_fifo(uart2_handle.instance);
+	hal_uart_disable_parity(uart2_handle.instance);
+	hal_uart_configure_stopbits(&uart2_handle);
+	hal_uart_configure_world_length(&uart2_handle);
+	
+	/*Select clock source for the UART*/
+	hal_uart_configure_clock_source(uart2_handle.instance, UART_CLOCK_SYSTEM);
+	
+	/*Enable Tx and Rx section of the UART module*/
+	hal_uart_enable_uart_Tx(uart2_handle.instance);
+	hal_uart_enable_uart_Rx(uart2_handle.instance);
+	
+	/*Enable transmission and reception for the UART2*/
+	hal_uart_enable_uart_module(uart2_handle.instance);
+	
+	/*Set the status as ready*/
+	uart2_handle.rx_state = UART_STATE_READY;
+	uart2_handle.tx_state = UART_STATE_READY;
 	
 }
-
-
-
 
 
 int main(void){
